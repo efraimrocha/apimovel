@@ -12,6 +12,15 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    public function imovel(){
+        return $this->HasMany(Imovel::class); // hassmany - tem muitos um usuario tem muitos imoveis
+    }
+
+    public function perfil(){
+        return $this->hasOne(Perfil_Usuario::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
