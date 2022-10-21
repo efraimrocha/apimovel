@@ -24,9 +24,10 @@ class ImovelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $imovel = $this->imovel->paginate('10');
+        $imovel = $this->imovel;
+       // $data= $request->all();
 
-        return response()->json(imovel, 200);
+        return response()->json($imovel, 200);
     }
 
 
@@ -73,6 +74,24 @@ class ImovelController extends Controller
             ], 200);
 
             }catch(\Exception $e){
+                return response()->json(['Erro' => $e->getMessage()], 401);
+        }
+    }
+
+    public function store(Request $request){
+        $data = $request->all();
+      //  dd($data);
+        
+        try {
+            $imovel = $this->imovel->create($data);
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Imovel cadastro com sucesso'
+                ]
+            ], 200);
+
+            }catch(\Exeption $e){
                 return response()->json(['Erro' => $e->getMessage()], 401);
         }
     }

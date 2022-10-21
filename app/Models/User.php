@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
 
 
     public function imovel(){
@@ -18,7 +19,7 @@ class User extends Authenticatable
     }
 
     public function perfil(){
-        return $this->hasOne(Perfil_Usuario::class);
+        return $this->HasOne(Perfil_Usuario::class);
     }
 
     /**

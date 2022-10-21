@@ -4,18 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Api\apimovel\app\Models\User;
+
 
 
 class UserController extends Controller
 {
+    private $user;
+
+    public function __contruct(User $user){
+        $this-> user = $user;
+    }
     /**
      * Display a listing of the resource.
-     *
+     
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $user = $this->user;
+
+        return response()->json($user, 200);
     }
 
     /**
@@ -24,10 +33,24 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $data = $request->all();
+      //  dd($data);
+        
+        try {
+            $user = $this->user->create($data);
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Imovel cadastro com sucesso'
+                ]
+            ], 200);
+
+            }catch(\Exeption $e){
+                return response()->json(['Erro' => $e->getMessage()], 401);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -38,7 +61,7 @@ class UserController extends Controller
     public function show($id)
     {
         try{
-            $imovel = $this->user->findOrFail($id);
+            $user = $this->user->findOrFail($id);
 
             return response()->json(['
                 dados' => [$user
@@ -49,16 +72,11 @@ class UserController extends Controller
         }
     }
 
-    private $user;
-
-    public function __contruct(User $user){
-        $this-> user = $user;
-    }
 
     public function user(){
         $user = $this->user->paginate('10');
 
-        return response()->json(ser, 200);
+        return response()->json($user, 200);
     }
 
 
@@ -110,10 +128,4 @@ class UserController extends Controller
                 return response()->json(['Erro' => $e->getMessage()], 401);
         }
     }
-
-    
-
 }
-
-
-    
