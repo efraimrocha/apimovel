@@ -26,8 +26,8 @@ Route::prefix('v1')->namespace('App\Http\Controllers\Api')->group(function(){
 });
 
 
-Route::name('usuarios')->group(function(){
-    Route::resource('usuarios','UserController'); #index
+Route::name('user')->group(function(){
+    Route::resource('user','UserController'); #index
 });
 
 Route::name('categoria.')->group(function(){

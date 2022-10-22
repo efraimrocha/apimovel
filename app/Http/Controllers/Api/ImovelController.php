@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Api\apimovel\app\Models\Imovel;
 use Api\apimovel\app\Http\Requests\ImovelRequest;
 
-
+// teste push
 
 class ImovelController extends Controller
 {
